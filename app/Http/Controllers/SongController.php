@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use App\Models\Song;
 use App\Models\Artist;
+use App\Models\Album;
 
 class SongController extends Controller
 {
@@ -26,11 +29,12 @@ class SongController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()    
     {
         //
-    
-        return view('dashboard.song.create');
+        $artists = Artist::all();
+        $albums = Album::all();
+        return view('dashboard.song.create', ['artists' => $artists, 'albums' => $albums]);
     }
 
     /**
@@ -42,13 +46,26 @@ class SongController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'title' => [
+                'required',
+                'unique:songs',
+                'max:255' 
+            ],
+            'released_year' => 'integer|digits:4'
+        ]);
+        
         $song = new Song;
         $song->title = $request->title;
         $song->overview = $request->overview;
         $song->released_year = $request->released_year;
-        $song->artist_id = Artist::where('name', $request->artist)->value('id');    
+        $song->artist_id = $request->artist;   
+        $song->slug = Str::of($request->title)->slug('-'); 
         $song->save();
-        return redirect('/dashboard/song');
+        
+        $song->albums()->attach($request->albums);
+        $song->save();
+        return redirect('/dashboard/song')->with('status', 'Song has been successfully created');
     }
 
     /**
@@ -72,8 +89,9 @@ class SongController extends Controller
     {
         //
         $song = Song::find($id);
-        $artist = Artist::where('id',$song->artist_id)->value('name');
-        return view('dashboard.song.edit', ['song' => $song, 'artist' => $artist]);
+        $artists = Artist::all();
+        $albums = Album:: all();
+        return view('dashboard.song.edit', ['song' => $song, 'artists' => $artists, 'albums' => $albums]);
     }
 
     /**
@@ -86,16 +104,26 @@ class SongController extends Controller
     public function update(Request $request, $id)
     {
         //
+    
+        $validated = $request->validate([
+            'title' => [
+                'required',
+                Rule::unique('songs')->ignore($request->song),
+                'max:255' 
+            ],
+            'released_year' => 'integer|digits:4'
+        ]);
         
         $song = Song::find($id);
         $song->title = $request->title;
         $song->overview = $request->overview;
         $song->released_year = $request->released_year;
+        $song->artist_id = $request->artist;
+        $song->slug = Str::of($request->title)->slug('-'); 
 
-        $artist_id = Artist::where('name', $request->artist)->value('id');
-        $song->artist_id = $artist_id;
+        $song->albums()->sync($request->albums);
         $song->save();
-        return redirect('/dashboard/song');
+        return redirect('/dashboard/song')->with('status', 'Song has been successfully updated');
     }
 
     /**
@@ -108,6 +136,6 @@ class SongController extends Controller
     {
         //
         Song::destroy($id);
-        return redirect('/dashboard/song');
+        return redirect('/dashboard/song')->with('status', 'Song has been successfully deleted');
     }
 }

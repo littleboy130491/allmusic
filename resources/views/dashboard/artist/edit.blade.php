@@ -1,5 +1,16 @@
 @extends('dashboard')
 @section('content')
+
+@if ($errors->any())
+  <div class="bg-red-100 rounded p-4 mb-2">
+    <ul>
+      @foreach ($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
+
 <form class="w-full max-w-lg" action="/dashboard/artist/{{ $artist->id }}" method="post" enctype="multipart/form-data">
 @csrf
 @method('put')
@@ -52,7 +63,7 @@
 
   <div class="md:flex md:items-center">
     <div class="md:w-1/3">
-      <button type="submit" class="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded" type="button">
+      <button type="submit" class="shadow bg-green-600 hover:bg-green-800 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
         Update
       </button>
     </div>

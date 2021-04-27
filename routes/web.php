@@ -41,12 +41,14 @@ Route::prefix('dashboard')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/dashboard/song/create', [SongController::class, 'create']);
+/*Route::get('/dashboard/song/create', [SongController::class, 'create']);
 Route::get('/dashboard/song/{id}/edit', [SongController::class, 'edit']);
 Route::put('/dashboard/song/{id}', [SongController::class, 'update']);
 Route::delete('/dashboard/song/{id}', [SongController::class, 'destroy']);
+*/
 
 Route::resource('dashboard/artist', ArtistController::class);
+Route::resource('dashboard/song', SongController::class);
 Route::resource('dashboard/album', AlbumController::class);
 Route::resource('dashboard/category', CategoryController::class);
 

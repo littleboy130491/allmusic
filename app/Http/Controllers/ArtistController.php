@@ -7,6 +7,8 @@ use App\Models\Artist;
 use App\Models\User;
 use App\Models\Album;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 
 class ArtistController extends Controller
@@ -45,14 +47,19 @@ class ArtistController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'name' => 'required'
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'unique:artists',
+                'max:255' 
+            ]
         ]);
 
         $artist = new Artist;
         $artist->name = $request->name;
         $artist->overview = $request->overview;
         $artist->biography = $request->biography;
+        $artist->slug = Str::of($request->name)->slug('-');
 
 
         if (isset($request->photo)) 
@@ -65,7 +72,7 @@ class ArtistController extends Controller
         }
         $artist->save();
         
-        return redirect('/dashboard/artist');
+        return redirect('/dashboard/artist')->with('status', 'Artist has been successfully created');
     }
 
     /**
@@ -74,12 +81,12 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    /*public function show($id)
     {
         //
         $songs = Artist::find($id)->songs;
         return view('pages.artist-archive', ['songs' => $songs]);
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -104,10 +111,19 @@ class ArtistController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('artists')->ignore($request->artist),
+                'max:255' 
+            ]
+        ]);
+
         $artist = Artist::find($id);
         $artist->name = $request->name;
         $artist->overview = $request->overview;
         $artist->biography = $request->biography;
+        $artist->slug = Str::of($request->name)->slug('-');
 
         if (isset($request->photo)) 
         {
@@ -122,7 +138,7 @@ class ArtistController extends Controller
 
         
 
-        return redirect('dashboard/artist');
+        return redirect('dashboard/artist')->with('status', 'Artist has been successfully updated');;
     }
 
      /* Remove the specified resource from storage.
@@ -134,6 +150,6 @@ class ArtistController extends Controller
     {
         //
         Artist::destroy($id);
-        return redirect('dashboard/artist');
+        return redirect('dashboard/artist')->with('status', 'Artist has been successfully deleted');;
     }
 }

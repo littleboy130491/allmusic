@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Album;
 use App\Models\Artist;
+use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class AlbumController extends Controller
 {
@@ -31,7 +34,8 @@ class AlbumController extends Controller
     {
         //
         $artists = Artist::all();
-        return view('dashboard.album.create', ['artists' => $artists]);
+        $categories = Category::all();
+        return view('dashboard.album.create', ['artists' => $artists, 'categories' => $categories]);
     }
 
     /**
@@ -43,6 +47,16 @@ class AlbumController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validated = $request->validate([
+            'title' => [
+                'required',
+                'unique:albums',
+                'max:255' 
+            ],
+            'released_year' => 'integer|digits:4'
+        ]);
+
         $album = new Album;
         $album->title = $request->title;
         $album->overview = $request->overview;
@@ -55,12 +69,14 @@ class AlbumController extends Controller
         $album->image = $file_full_path;
         }
 
-        $artist_id = Artist::where('name', $request->artist)->value('id');
-        $album->artist_id = $artist_id;
-
+        $album->artist_id = $request->artist;
+        $album->slug = Str::of($request->title)->slug('-');
+        $album->save();
+        
+        $album->categories()->attach($request->categories);
         $album->save();
 
-        return redirect('/dashboard/album');
+        return redirect('/dashboard/album')->with('status', 'Album has been successfully created');;
     }
 
     /**
@@ -84,7 +100,12 @@ class AlbumController extends Controller
     {
         //
         $album = Album::find($id);
-        return view('dashboard.album.edit', ['album' => $album]);
+        $artists = Artist::all();
+        $categories = Category::all();
+
+        return view('dashboard.album.edit', ['album' => $album, 'artists' => $artists, 'categories' => $categories]);
+
+        
     }
 
     /**
@@ -97,6 +118,15 @@ class AlbumController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validated = $request->validate([
+            'title' => [
+                'required',
+                Rule::unique('albums')->ignore($request->album),
+                'max:255' 
+            ],
+            'released_year' => 'integer|digits:4'
+        ]);
+       
         $album = Album::find($id);
         $album->title = $request->title;
         $album->overview = $request->overview;
@@ -109,14 +139,13 @@ class AlbumController extends Controller
         $file_full_path = asset(Storage::url($file_storage_path));
         $album->image = $file_full_path;
         }
-
-        $artist_id = Artist::where('name', $request->artist)->value('id');
-
-        $album->artist_id = $artist_id;
-       
+ 
+        $album->artist_id = $request->artist;
+        $album->slug = Str::of($request->title)->slug('-');
+        $album->categories()->sync($request->categories);
         $album->save();
 
-        return redirect('/dashboard/album');
+        return redirect('/dashboard/album')->with('status', 'Album has been successfully updated');
     }
 
     /**
@@ -129,6 +158,6 @@ class AlbumController extends Controller
     {
         //
         Album::destroy($id);
-        return redirect('/dashboard/album');
+        return redirect('/dashboard/album')->with('status', 'Album has been successfully deleted');
     }
 }

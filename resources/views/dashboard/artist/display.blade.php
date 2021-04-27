@@ -3,12 +3,17 @@
 
  <!--Container-->
  <div class="container mt-6">
- <a href="/dashboard/artist/create">Create New Artist</a>
+        @if (session('status'))
+        <div class="container bg-blue-600 text-white rounded p-4 mb-6">
+        {{ session('status')}}
+        </div>     	
+        @endif	
+        <a class="shadow bg-green-600 hover:bg-green-800 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" href="/dashboard/artist/create">Create New Artist</a>
     
       		 
                
                <!--Card-->
-                <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+                <div id='recipients' class="p-8 mt-6 lg:mt-6 rounded shadow bg-white">
                 
                   
                    <table class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
@@ -16,10 +21,7 @@
                            <tr>
                                <th>#</th>
                                <th>Artist Name</th>
-                               <th>Artist Overview</th>
-                               <th>Artist Biography</th>
                                <th>Artist Photo</th>
-                               <th>Song</th>
                                <th>Album</th>
                            
                                <th>Action</th>
@@ -27,22 +29,15 @@
                        </thead>
                        <tbody>
                        @foreach($artists as $artist)
-                           <tr>
-                               <td>{{ $loop->index + 1 }}</td>
+                           <tr class="h-12">
+                               <td>{{ $loop->iteration }}</td>
                                <td>{{ $artist->name }}</td>
-                               <td>{{ $artist->overview }}</td>
-                               <td>{{ $artist->biography }}</td>
                                <td>
                                     @if (isset ($artist->photo))
                                         <img src="{{ $artist->photo }}" width="100px">
                                         @else
                                         <img src="/storage/1024px-No_image_available.svg.png" width="100px">
                                     @endif
-                               </td>
-                               <td>
-                                    @foreach ($artist->songs as $song)
-                                            {{ $song->title }}
-                                    @endforeach
                                </td>
                                <td>
                                     @foreach ($artist->albums as $album)
@@ -52,13 +47,13 @@
                     
                                
                                <td>
-                                <a href="/dashboard/artist/{{ $artist->id }}/edit">Edit
-                                </a> / 
+                                <a class="shadow bg-green-600 hover:bg-green-800 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" href="/dashboard/artist/{{ $artist->id }}/edit">Edit
+                                </a>
                                 <form action="/dashboard/artist/{{ $artist->id }}" method="post" class="inline">
                                     @csrf
                                     @method('delete')                
-                                    <button type="submit"> 
-                                    Delete Artist
+                                    <button class="shadow bg-red-600 hover:bg-red-800 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded mx-2" type="submit"> 
+                                    Delete
                                     </button>
                                 </form>
                                </td>

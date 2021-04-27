@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Album;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
@@ -16,7 +19,6 @@ class CategoryController extends Controller
     {
         //
         $categories = Category::all();
-        
        
         return view('dashboard.category.display', ['categories' => $categories]);
     }
@@ -41,11 +43,20 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'unique:categories',
+                'max:255' 
+            ]
+        ]);
+
         $category = new Category;
         $category->name = $request->name;
+        $category->slug = Str::of($request->name)->slug('-');
         $category->save();
 
-        return redirect('dashboard/category');
+        return redirect('dashboard/category')->with('status', 'Category has been successfully created');
     }
 
     /**
@@ -84,11 +95,20 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('categories')->ignore($request->category),
+                'max:255' 
+            ]
+        ]);
+
         $category = Category::find($category->id);
         $category->name = $request->name;
+        $category->slug = Str::of($request->name)->slug('-');
         $category->save();
 
-        return redirect('dashboard/category');
+        return redirect('dashboard/category')->with('status', 'Category has been successfully updated');
     }
 
     /**
@@ -101,6 +121,6 @@ class CategoryController extends Controller
     {
         //
         Category::destroy($category);
-        return redirect('dashboard/category');
+        return redirect('dashboard/category')->with('status', 'Category has been successfully deleted');
     }
 }
