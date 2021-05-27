@@ -5,19 +5,19 @@
 @endsection
 @section('content')
 <div class="px-12 py-4">
-    <div class="container flex py-8 space-x-8">
-        <div>
+    <div class="container block md:flex py-8 md:space-x-8">
+        <div class="">
             <img class="rounded-lg" src="/storage/{{ $album->image }}" alt="{{ $album->title }}">
         </div>
-        <div>
-        <h1 class="font-bold text-3xl">{{ $album->title }}</h1>
-        <p>{{ $album->released_year }}</p>
-        <p>
-        @foreach($album->categories as $album_category)
-            {{ $album_category->name }}
-        @endforeach
-        </p>
-        <h2 class="font-bold mt-4">Overview</h2>
+        <div class="">
+            <h1 class="font-bold text-3xl">{{ $album->title }}</h1>
+            <p>{{ $album->released_year }}</p>
+            <p>
+            @foreach($album->categories as $album_category)
+                {{ $album_category->name }}
+            @endforeach
+            </p>
+            <h2 class="font-bold mt-4">Overview</h2>
         <p>{{ $album->overview }}</p>
        
         </div>

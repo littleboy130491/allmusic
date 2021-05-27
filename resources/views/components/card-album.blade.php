@@ -12,7 +12,7 @@
    <div class="container pt-4">
           
       <p class="italic bg-blue-900 text-white rounded inline px-2 py-1"> 
-         @if ($song->categories->isNotEmpty())
+         @if ($album->categories->isNotEmpty())
             @foreach ($album->categories as $album_category)
                {{ $album_category->name }}
             @endforeach

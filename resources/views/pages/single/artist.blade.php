@@ -5,16 +5,16 @@
 @endsection
 @section('content')
 <div class="px-12 py-4">
-    <div class="container flex py-8 space-x-8">
+    <div class="container block md:flex py-8 md:space-x-8">
         <div>
             <img class="rounded-lg" src="/storage/{{ $artist->photo }}" alt="{{ $artist->name }}">
         </div>
         <div>
-        <h1 class="font-bold text-3xl">{{ $artist->name }}</h1>
-    
-        <h2 class="font-bold mt-4">Overview</h2>
-        <p>{{ $artist->overview }}</p>
-       
+            <h1 class="font-bold text-3xl">{{ $artist->name }}</h1>
+        
+            <h2 class="font-bold mt-4">Overview</h2>
+            <p>{{ $artist->overview }}</p>
+        
         </div>
     </div>
 
