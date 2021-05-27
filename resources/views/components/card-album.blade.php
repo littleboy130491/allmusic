@@ -12,9 +12,13 @@
    <div class="container pt-4">
           
       <p class="italic bg-blue-900 text-white rounded inline px-2 py-1"> 
-         @foreach ($album->categories as $album_category)
-            {{ $album_category->name }}
-         @endforeach
+         @if ($song->categories->isNotEmpty())
+            @foreach ($album->categories as $album_category)
+               {{ $album_category->name }}
+            @endforeach
+         @else
+         Uncategorized
+         @endif
       </p>
       <a href="/album/{{ $album->slug }}" class="font-bold mt-2 block">{{ $album->title }}</a>
       <a href="/artist/{{ $album->artist->slug }}" class="block italic">by {{ $album->artist->name }}</a>
