@@ -16,7 +16,7 @@
                 <div id='recipients' class="p-8 mt-6 lg:mt-6 rounded shadow bg-white">
                 
                   
-                   <table class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                   <table class="stripe hover text-left" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                        <thead>
                            <tr>
                                <th>#</th>
@@ -34,14 +34,14 @@
                                <td>{{ $artist->name }}</td>
                                <td>
                                     @if (isset ($artist->photo))
-                                        <img src="{{ $artist->photo }}" width="100px">
+                                        <img src="/storage/{{ $artist->photo }}" width="100px">
                                         @else
                                         <img src="/storage/1024px-No_image_available.svg.png" width="100px">
                                     @endif
                                </td>
                                <td>
-                                    @foreach ($artist->albums as $album)
-                                            {{ $album->title }}
+                                    @foreach ($artist->albums as $artist_album)
+                                            {{ $artist_album->title }}
                                     @endforeach
                                </td>
                     

@@ -29,7 +29,10 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
         Song Overview
       </label>
-      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="overview" name="overview">
+      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+      id="overview" 
+      name="overview"
+      rows="10">
       {{ $song->overview }}</textarea>
     </div>
   </div>
@@ -77,6 +80,24 @@
         @endforeach
       >
       <label for="{{ $album->title }}">{{ $album->title }}</label><br>
+      @endforeach
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+          Category
+      </label>
+      @foreach ($categories as $category)
+      <input type="checkbox" id="{{ $category->name }}" name="categories[]" value="{{ $category->id }}"
+        @foreach ($song->categories as $song_category)
+          @if ($song_category->name == $category->name)
+          checked
+          @endif
+        @endforeach
+      >
+      <label for="{{ $category->name }}">{{ $category->name }}</label><br>
       @endforeach
     </div>
   </div>

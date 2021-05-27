@@ -29,7 +29,10 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
         Artist Overview
       </label>
-      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="overview" name="overview">
+      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+      id="overview" 
+      name="overview"
+      rows="10">
       {{ $artist->overview }}</textarea>
     </div>
   </div>
@@ -39,7 +42,10 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
         Artist Biography
       </label>
-      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="biography" name="biography">
+      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+      id="biography" 
+      name="biography"
+      rows="10">
       {{ $artist->biography }}</textarea>
     </div>
   </div>
@@ -51,7 +57,7 @@
         Artist Photo
       </label>
       @isset($artist->photo)
-      <img src="{{ $artist->photo }}" width="100px">
+      <img src="/storage/{{ $artist->photo }}" width="100px">
       Upload file baru untuk mengganti foto
       @endisset
       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="photo" type="file" name="photo">

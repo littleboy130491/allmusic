@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $category->slug = Str::of($request->name)->slug('-');
         $category->save();
 
-        return redirect('dashboard/category')->with('status', 'Category has been successfully created');
+        return redirect('dashboard/category')->with('status', 'Category '.$category->name.' successfully created');
     }
 
     /**
@@ -108,7 +108,7 @@ class CategoryController extends Controller
         $category->slug = Str::of($request->name)->slug('-');
         $category->save();
 
-        return redirect('dashboard/category')->with('status', 'Category has been successfully updated');
+        return redirect('dashboard/category')->with('status', 'Category '.$category->name.' successfully updated');
     }
 
     /**
@@ -120,7 +120,8 @@ class CategoryController extends Controller
     public function destroy($category)
     {
         //
+        $category_name = Category::where('id', $category)->value('name');
         Category::destroy($category);
-        return redirect('dashboard/category')->with('status', 'Category has been successfully deleted');
+        return redirect('dashboard/category')->with('status', 'Category '.$category_name.' successfully deleted');
     }
 }

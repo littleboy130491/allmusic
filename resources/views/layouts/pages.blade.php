@@ -2,6 +2,7 @@
 
 @yield('content')
 
+
 @include('layouts.footer-pages')
 
    

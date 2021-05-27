@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex flex-wrap justify-start space-x-4">
             <div><a href="/dashboard/">Dashboard</a></div>
-            <div><a href="/dashboard/song">Song</a></div>
             <div><a href="/dashboard/artist">Artist</a></div>
-            <div><a href="/dashboard/album">Album</a></div>
             <div><a href="/dashboard/category">Category</a></div>
+            <div><a href="/dashboard/song">Song</a></div>
+            <div><a href="/dashboard/album">Album</a></div>
             
         </div>
     </x-slot>

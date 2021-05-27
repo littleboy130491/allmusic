@@ -83,6 +83,26 @@
     </div>
   </div>
 
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+          Category
+      </label>
+      @foreach ($categories as $category)
+      <input type="checkbox" id="{{ $category->name }}" name="categories[]" value="{{ $category->id }}"
+          @if (old('categories'))
+            @foreach (old('categories') as $old_category)
+              @if ($old_category == $category->id)
+              checked
+              @endif
+            @endforeach
+          @endif
+      >
+      <label for="{{ $category->name }}">{{ $category->name }}</label><br>
+      @endforeach
+    </div>
+  </div>
+
 
   <div class="md:flex md:items-center">
     <div class="md:w-1/3">

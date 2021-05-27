@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAlbumIdSongsTable extends Migration
+class CreateCategoryablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class AddAlbumIdSongsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('songs', function(Blueprint $table) 
-        {
-            $table->integer('album_id')->nullable();
+        Schema::create('categoryables', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('categoryable_id');
+            $table->string('categoryable_type');
         });
     }
 
@@ -27,10 +28,6 @@ class AddAlbumIdSongsTable extends Migration
      */
     public function down()
     {
-        //
-        Schema::table('songs', function (Blueprint $table)
-        {
-            $table->dropColumn('album_id');
-        });
+        Schema::dropIfExists('categoryables');
     }
 }

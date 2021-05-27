@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Song;
 use App\Models\Artist;
 use App\Models\Album;
+use App\Models\Category;
 
 class SongController extends Controller
 {
@@ -34,7 +35,11 @@ class SongController extends Controller
         //
         $artists = Artist::all();
         $albums = Album::all();
-        return view('dashboard.song.create', ['artists' => $artists, 'albums' => $albums]);
+        $categories = Category::all();
+        return view('dashboard.song.create', 
+            ['artists' => $artists, 
+            'albums' => $albums,
+            'categories' => $categories]);
     }
 
     /**
@@ -64,8 +69,9 @@ class SongController extends Controller
         $song->save();
         
         $song->albums()->attach($request->albums);
+        $song->categories()->attach($request->categories);
         $song->save();
-        return redirect('/dashboard/song')->with('status', 'Song has been successfully created');
+        return redirect('/dashboard/song')->with('status', 'Song '.$song->title.' successfully created');
     }
 
     /**
@@ -77,6 +83,8 @@ class SongController extends Controller
     public function show($id)
     {
         //
+        $song = Song::where('slug', $id)->first();
+        return view('pages.single.song', ['song'=>$song]);
     }
 
     /**
@@ -91,7 +99,12 @@ class SongController extends Controller
         $song = Song::find($id);
         $artists = Artist::all();
         $albums = Album:: all();
-        return view('dashboard.song.edit', ['song' => $song, 'artists' => $artists, 'albums' => $albums]);
+        $categories = Category:: all();
+        return view('dashboard.song.edit', [
+            'song' => $song, 
+            'artists' => $artists, 
+            'albums' => $albums,
+            'categories' => $categories]);
     }
 
     /**
@@ -122,8 +135,9 @@ class SongController extends Controller
         $song->slug = Str::of($request->title)->slug('-'); 
 
         $song->albums()->sync($request->albums);
+        $song->categories()->sync($request->categories);
         $song->save();
-        return redirect('/dashboard/song')->with('status', 'Song has been successfully updated');
+        return redirect('/dashboard/song')->with('status', 'Song '.$song->title.' successfully updated');
     }
 
     /**
@@ -135,7 +149,9 @@ class SongController extends Controller
     public function destroy($id)
     {
         //
+        
+        $song = Song::where('id', $id)->value('title');
         Song::destroy($id);
-        return redirect('/dashboard/song')->with('status', 'Song has been successfully deleted');
+        return redirect('/dashboard/song')->with('status', 'Song '.$song. ' successfully deleted');
     }
 }

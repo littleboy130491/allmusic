@@ -15,7 +15,6 @@ class CreateAlbumCategoriesTable extends Migration
     {
         Schema::create('album_categories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->unsignedInteger('album_id');
             $table->unsignedInteger('category_id');
 

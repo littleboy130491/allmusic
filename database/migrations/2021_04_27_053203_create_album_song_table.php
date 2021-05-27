@@ -17,7 +17,6 @@ class CreateAlbumSongTable extends Migration
             $table->id();
             $table->integer('album_id');
             $table->integer('song_id');
-            $table->timestamps();
         });
     }
 

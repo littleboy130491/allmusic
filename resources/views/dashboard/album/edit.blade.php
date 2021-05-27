@@ -29,7 +29,10 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
         Album Overview
       </label>
-      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="overview" name="overview">
+      <textarea class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+      id="overview" 
+      name="overview"
+      rows="10">
       {{ $album->overview }}</textarea>
     </div>
   </div>
@@ -51,7 +54,7 @@
         Album Image
       </label>
       @isset ($album->image)
-      <img src="{{ $album->image }}" width="100px">
+      <img src="/storage/{{ $album->image }}" width="100px">
       @endisset
       <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="image" type="file" name="image">
      

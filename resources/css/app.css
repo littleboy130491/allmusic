@@ -1,3 +1,16 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+@layer utilites {
+    .hero {
+        background-image: url('/storage/home-hero-bg.jpg');
+    }
+}
+
+@layer base {
+    h2 {
+        @apply text-xl;
+    }
+}

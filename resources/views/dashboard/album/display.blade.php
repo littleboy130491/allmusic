@@ -24,7 +24,7 @@
                                <th>Album Overview</th>
                                <th>Album Released Year</th>
                                <th>Album Image</th>
-                               <th>Album Category</th>
+                               <th>Category</th>
                                <th>Artist</th>
                            
                                <th>Action</th>
@@ -39,14 +39,16 @@
                                <td>{{ $album->released_year }}</td>
                                <td>
                                     @if (isset($album->image))
-                                    <img src="{{ $album->image }}" width="100px">
+                                    <img src="/storage/{{ $album->image }}" width="100px">
                                     @else
                                     <img src="/storage/1024px-No_image_available.svg.png" width="100px">
                                     @endif
                                </td>
                                <td>
-                                @foreach ($album->categories as $category)
-                                {{ $category->name }}
+                                @foreach ($album->categories as $album_category)
+                                    <a href="/dashboard/category/{{ $album_category->id }}/edit">
+                                    {{ $album_category->name }}
+                                    </a>
                                 @endforeach
                                </td>
                                <td>{{ @$album->artist->name }}</td>

@@ -66,13 +66,11 @@ class ArtistController extends Controller
         {
             $file_name = $request->photo->getClientOriginalName();
             $file_storage_path = $request->photo->storeAs('artists', $file_name, 'public');
-            $file_full_path = asset(Storage::url($file_storage_path));
-
-            $artist->photo = $file_full_path;
+            $artist->photo = $file_storage_path;
         }
         $artist->save();
         
-        return redirect('/dashboard/artist')->with('status', 'Artist has been successfully created');
+        return redirect('/dashboard/artist')->with('status', 'Artist '.$artist->name.' successfully created');
     }
 
     /**
@@ -81,12 +79,12 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    /*public function show($id)
+    public function show($id)
     {
         //
-        $songs = Artist::find($id)->songs;
-        return view('pages.artist-archive', ['songs' => $songs]);
-    }*/
+        $artist = Artist::where('slug', $id)->first();
+        return view('pages.single.artist', ['artist' => $artist]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -129,16 +127,15 @@ class ArtistController extends Controller
         {
         $file_name = $request->photo->getClientOriginalName();
         $file_storage_path = $request->photo->storeAs('artists', $file_name, 'public');
-        
-        $file_full_path = asset(Storage::url($file_storage_path));
-        $artist->photo = $file_full_path;
+        $artist->photo = $file_storage_path;
+        ;
         }
 
         $artist->save();
 
         
 
-        return redirect('dashboard/artist')->with('status', 'Artist has been successfully updated');;
+        return redirect('dashboard/artist')->with('status', 'Artist '.$artist->name.' successfully updated');;
     }
 
      /* Remove the specified resource from storage.
@@ -149,7 +146,8 @@ class ArtistController extends Controller
     public function destroy($id)
     {
         //
+        $artist = Artist::where('id', $id)->value('name');
         Artist::destroy($id);
-        return redirect('dashboard/artist')->with('status', 'Artist has been successfully deleted');;
+        return redirect('dashboard/artist')->with('status', 'Artist '.$artist.' successfully deleted');;
     }
 }

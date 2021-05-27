@@ -24,6 +24,7 @@
                                <th>Song Overview</th>
                                <th>Song Released Year</th>
                                <th>Artist</th>
+                               <th>Category</th>
                                <th>Action</th>
                             </tr>
                        </thead>
@@ -39,6 +40,15 @@
                                         {{ @$song->artist->name }}
                                     </a>
                                     </td>
+                               
+                               <td>
+                                    @foreach ($song->categories as $song_category)
+                                    <a href="/dashboard/category/{{ @$song_category->id }}/edit">
+                                        {{ @$song_category->name }}
+                                    </a>
+                                     @endforeach
+                               </td>
+
                                <td>
                                 <a class="shadow bg-green-600 hover:bg-green-800 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" href="/dashboard/song/{{ $song->id }}/edit">Edit
                                 </a>

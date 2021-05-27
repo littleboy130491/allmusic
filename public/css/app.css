@@ -748,6 +748,11 @@ select {
   outline: 1px auto -webkit-focus-ring-color;
 }
 
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
 .container {
   width: 100%;
 }
@@ -4424,6 +4429,10 @@ select {
 
 .bg-gradient-to-tl {
   background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+}
+
+.bg-home-hero {
+  background-image: url('/storage/home-hero-bg.jpg');
 }
 
 .from-transparent {
@@ -32088,6 +32097,12 @@ select {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+@layer utilites {
+  .hero {
+    background-image: url('/storage/home-hero-bg.jpg');
+  }
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -35765,6 +35780,10 @@ select {
 
   .sm\:bg-gradient-to-tl {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  }
+
+  .sm\:bg-home-hero {
+    background-image: url('/storage/home-hero-bg.jpg');
   }
 
   .sm\:from-transparent {
@@ -66938,6 +66957,10 @@ select {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
   }
 
+  .md\:bg-home-hero {
+    background-image: url('/storage/home-hero-bg.jpg');
+  }
+
   .md\:from-transparent {
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -98107,6 +98130,10 @@ select {
 
   .lg\:bg-gradient-to-tl {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
+  }
+
+  .lg\:bg-home-hero {
+    background-image: url('/storage/home-hero-bg.jpg');
   }
 
   .lg\:from-transparent {
@@ -129280,6 +129307,10 @@ select {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
   }
 
+  .xl\:bg-home-hero {
+    background-image: url('/storage/home-hero-bg.jpg');
+  }
+
   .xl\:from-transparent {
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -160451,6 +160482,10 @@ select {
     background-image: linear-gradient(to top left, var(--tw-gradient-stops));
   }
 
+  .\32xl\:bg-home-hero {
+    background-image: url('/storage/home-hero-bg.jpg');
+  }
+
   .\32xl\:from-transparent {
     --tw-gradient-from: transparent;
     --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(0, 0, 0, 0));
@@ -187942,4 +187977,3 @@ select {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
-

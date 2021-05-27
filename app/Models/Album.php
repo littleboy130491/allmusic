@@ -21,7 +21,7 @@ class Album extends Model
 
     public function categories()
         {
-            return $this->belongsToMany(Category::class, 'album_categories');
+            return $this->morphToMany(Category::class, 'categoryable');
         }
     
 }
