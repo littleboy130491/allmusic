@@ -20,6 +20,7 @@ class CreateArtistsTable extends Migration
             $table->string('biography')->nullable();
             $table->string('photo')->nullable();
             $table->string('slug')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamps();
         });
     }

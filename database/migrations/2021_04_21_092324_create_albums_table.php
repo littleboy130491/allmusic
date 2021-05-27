@@ -21,6 +21,7 @@ class CreateAlbumsTable extends Migration
             $table->string('image')->nullable();
             $table->string('overview');
             $table->string('slug')->nullable();
+            $table->string('created_by')->nullable();
             $table->timestamps();
         });
     }
