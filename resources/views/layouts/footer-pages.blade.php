@@ -14,7 +14,7 @@
 
         toggleMenu.addEventListener('click', () => 
         {
-          if (mobileNav.style.display === "none") {
+          if (mobileNav.style.display == "none" || mobileNav.style.display == "") {
           mobileNav.style.display = "block";
           } else {
           mobileNav.style.display = "none";
