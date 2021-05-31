@@ -38,12 +38,12 @@
 
     <div class="container py-8">
         <h2 class="font-bold mb-2">Album</h2>
-        <div class="flex space-x-2 flex-nowrap overflow-x-scroll">
+        <div class="flex space-x-2 flex-nowrap overflow-x-scroll items-stretch">
             @foreach ($artist->albums as $artist_album)
             <div class="flex-50 md:flex-20">
-                <div class="image">
+                <div class="image mb-4 h-80 md:w-60">
                     <a href="/album/{{ $artist_album->slug }}">
-                        <img class="rounded-lg mb-4" src="/storage/{{ $artist_album->image }}" 
+                        <img class="rounded-lg object-cover h-80 md:w-60" src="/storage/{{ $artist_album->image }}" 
                         alt="{{ $artist_album->title }}">
                     </a>
                 </div>
