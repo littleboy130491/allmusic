@@ -16,7 +16,7 @@
 
                 <a href="/artist/{{ $artist->slug }}">
                 <img 
-                class="w-48 rounded-lg object-cover w-full h-80"
+                class="w-48 rounded-lg object-cover w-full h-full"
                 src="
                     @if (isset($artist->photo))
                     /storage/{{ $artist->photo }}"

@@ -42,8 +42,10 @@
             <div class="flex-50 md:flex-20">
                     <div class="image mb-4 h-60 w-full">
                         <a href="/artist/{{ $album->artist->slug }}">
-                            <img class="rounded-lg mb-4" src="/storage/{{ $album->artist->photo }}" 
-                            alt="{{ $album->artist->name }}">
+                            <img 
+                                class="rounded-lg mb-4 object-cover h-full w-full" 
+                                src="/storage/{{ $album->artist->photo }}" 
+                                alt="{{ $album->artist->name }}">
                         </a>
                             <p>{{ $album->artist->name }}</p>
                     </div>
