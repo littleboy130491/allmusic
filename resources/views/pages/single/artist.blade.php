@@ -4,7 +4,7 @@
 {{ $artist->name }}
 @endsection
 @section('content')
-<div class="px-12 py-4">
+<div class="px-4 md:px-12 py-4">
     <div class="container block md:flex py-8 md:space-x-8">
         <div>
             <img class="rounded-lg" src="/storage/{{ $artist->photo }}" alt="{{ $artist->name }}">
@@ -38,15 +38,19 @@
 
     <div class="container py-8">
         <h2 class="font-bold mb-2">Album</h2>
-        <div class="flex space-x-4">
+        <div class="flex space-x-2 flex-nowrap overflow-x-scroll">
             @foreach ($artist->albums as $artist_album)
-            <div>
-            <a href="/album/{{ $artist_album->slug }}">
-                <img class="rounded-lg mb-4" src="/storage/{{ $artist_album->image }}" 
-                alt="{{ $artist_album->title }}">
-            </a>
-                <p>{{ $artist_album->title }}</p>
-                <p>{{ @$artist_album->released_year }}</p>
+            <div class="min-w-1/2 md:min-w-1/5">
+                <div class="image">
+                    <a href="/album/{{ $artist_album->slug }}">
+                        <img class="rounded-lg mb-4" src="/storage/{{ $artist_album->image }}" 
+                        alt="{{ $artist_album->title }}">
+                    </a>
+                </div>
+                <div class="content">
+                    <p>{{ $artist_album->title }}</p>
+                    <p>{{ @$artist_album->released_year }}</p>
+                </div>
             </div>
             @endforeach
         </div>
