@@ -17,6 +17,13 @@ module.exports = {
             'full': '100%',
         },
 
+        flex: {
+            '20': '0 0 20%',
+            '25': '0 0 25%',
+            '50': '0 0 50%',
+            '75': '0 0 75%',
+        },
+
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],

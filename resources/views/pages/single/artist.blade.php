@@ -40,7 +40,7 @@
         <h2 class="font-bold mb-2">Album</h2>
         <div class="flex space-x-2 flex-nowrap overflow-x-scroll">
             @foreach ($artist->albums as $artist_album)
-            <div class="min-w-1/2 md:min-w-1/5">
+            <div class="flex-50 md:flex-20">
                 <div class="image">
                     <a href="/album/{{ $artist_album->slug }}">
                         <img class="rounded-lg mb-4" src="/storage/{{ $artist_album->image }}" 
