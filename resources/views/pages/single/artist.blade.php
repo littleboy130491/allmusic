@@ -50,7 +50,7 @@
                     </a>
                 </div>
                 <div class="content">
-                    <p>{{ $artist_album->title }}</p>
+                    <p class="font-bold">{{ $artist_album->title }}</p>
                     <p>{{ @$artist_album->released_year }}</p>
                 </div>
             </div>
