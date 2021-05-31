@@ -1,4 +1,4 @@
-<div class="card-wrapper flex-50 md:flex-33 lg:flex-20 p-2">  
+<div class="card-wrapper flex-50 md:flex-33 lg:flex-25 p-2">  
    <div class="image bg-gray-200 h-80 w-full">
       <a href="/song/{{ $song->slug }}">
          <img 
@@ -12,7 +12,7 @@
          >
       </a>
    </div>
-   
+
    <div class="content container pt-4">
           
       <p class="italic bg-blue-900 text-white rounded inline px-2 py-1"> 
