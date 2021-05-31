@@ -49,11 +49,11 @@
       </nav>  
       <nav id="mobile-nav" class="hidden border-t-2">
           <div class="flex-col space-y-4 p-6">
-          <a class="block" href="/artists">ARTIST</a>
-          <a class="block" href="/songs">SONG</a>
-          <a class="block" href="/albums">ALBUM</a>
-          <a class="block" href="/about">ABOUT</a>
-          <div class="relative w-full">
+            <a class="block" href="/artists">ARTIST</a>
+            <a class="block" href="/songs">SONG</a>
+            <a class="block" href="/albums">ALBUM</a>
+            <a class="block" href="/about">ABOUT</a>
+            <div class="relative">
               <livewire:search />
             </div>
           </div>

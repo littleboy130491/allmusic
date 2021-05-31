@@ -2,7 +2,7 @@
 
     <input 
         type="search" 
-        class="bg-purple-white shadow rounded border-0 p-3" 
+        class="bg-purple-white shadow rounded border-0 p-3 min-w-full" 
         placeholder="Search artist here.."
         wire:model="searchTerm">
 
