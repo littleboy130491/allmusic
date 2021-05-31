@@ -6,11 +6,11 @@
 @section('content')
 <div class="px-4 md:px-12 py-4">
     <div class="container block md:flex py-8 md:space-x-8">
-        <div>
-            <img class="rounded-lg" src="/storage/{{ $artist->photo }}" alt="{{ $artist->name }}">
+        <div class="w-full md:w-1/3 h-80 bg-gray-200">
+            <img class="rounded-lg object-cover w-full h-full" src="/storage/{{ $artist->photo }}" alt="{{ $artist->name }}">
         </div>
         <div>
-            <h1 class="font-bold text-3xl">{{ $artist->name }}</h1>
+            <h1 class="font-bold text-3xl mt-4 md:mt-0">{{ $artist->name }}</h1>
         
             <h2 class="font-bold mt-4">Overview</h2>
             <p>{{ $artist->overview }}</p>
@@ -38,12 +38,12 @@
 
     <div class="container py-8">
         <h2 class="font-bold mb-2">Album</h2>
-        <div class="flex space-x-2 flex-nowrap overflow-x-scroll items-stretch">
+        <div class="flex space-x-2 flex-nowrap overflow-x-scroll">
             @foreach ($artist->albums as $artist_album)
             <div class="flex-50 md:flex-20">
-                <div class="image mb-4 h-80 md:w-60">
+                <div class="image mb-4 h-60 w-full">
                     <a href="/album/{{ $artist_album->slug }}">
-                        <img class="rounded-lg object-cover h-80 md:w-60" src="/storage/{{ $artist_album->image }}" 
+                        <img class="rounded-lg object-cover h-full w-full" src="/storage/{{ $artist_album->image }}" 
                         alt="{{ $artist_album->title }}">
                     </a>
                 </div>
