@@ -3,7 +3,7 @@
     <input 
         type="search" 
         class="bg-purple-white shadow rounded border-0 p-3" 
-        placeholder="Search here.."
+        placeholder="Search artist here.."
         wire:model="searchTerm">
 
 
@@ -12,13 +12,22 @@
         @if ($results->isNotEmpty())
             @foreach($results as $result)
             <div class="flex space-x-2">
-                <div>
-                    <img class="w-20" src="/storage/{{ $result->photo }} " alt="{{ $result->name }}">
-                </div>
-                <div>
-                    <h2 class="font-bold">{{ $result->name }}</h3>
-                    <p>{{ $result->overview }}</p>
-                </div>
+                
+                    <div>
+                        <a href="/artist/{{ $result->slug }}">
+                        <img 
+                        class="w-20" 
+                        src="/storage/{{ $result->photo }}" 
+                        alt="{{ $result->name }}">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="/artist/{{ $result->slug }}">
+                        <h2 class="font-bold">{{ $result->name }}</h3>
+                        <p>{{ $result->overview }}</p>
+                        </a>
+                    </div>
+                
             </div>        
             @endforeach
         @else No Result Found.
