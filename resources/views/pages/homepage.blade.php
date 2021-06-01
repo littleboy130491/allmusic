@@ -7,7 +7,7 @@
 
 <!--Cards Section Start -->
 
-<div class="container px-6 lg:px-32 md:px-12 py-24">
+<div class="container px-4 md:px-12 py-24">
   <h2 class="font-bold mb-8 text-3xl">Featured Albums</h2> 
  
   

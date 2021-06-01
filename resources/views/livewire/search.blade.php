@@ -1,4 +1,4 @@
-<div>
+<div id="search">
 
     <input 
         type="search" 
