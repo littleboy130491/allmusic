@@ -68,6 +68,24 @@
 
   <div class="flex flex-wrap -mx-3 mb-6">
     <div class="w-full px-3">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+        Songwriter
+      </label>
+      @foreach ($artists as $artist)
+      
+      <input type="radio" id="{{ $artist->name }}" name="songwriter" value="{{ $artist->id }}"
+      @if ($artist->id == $song->songwriter_id)
+        checked
+      @endif
+      >
+      <label for="{{ $artist->name }}">{{ $artist->name }}</label><br>
+      @endforeach
+     
+    </div>
+  </div>
+
+  <div class="flex flex-wrap -mx-3 mb-6">
+    <div class="w-full px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
           Album
       </label>

@@ -64,7 +64,8 @@ class SongController extends Controller
         $song->title = $request->title;
         $song->overview = $request->overview;
         $song->released_year = $request->released_year;
-        $song->artist_id = $request->artist;   
+        $song->artist_id = $request->artist;  
+        $song->songwriter_id = $request->songwriter;  
         $song->slug = Str::of($request->title)->slug('-'); 
         $song->save();
         
@@ -132,6 +133,7 @@ class SongController extends Controller
         $song->overview = $request->overview;
         $song->released_year = $request->released_year;
         $song->artist_id = $request->artist;
+        $song->songwriter_id = $request->songwriter; 
         $song->slug = Str::of($request->title)->slug('-'); 
 
         $song->albums()->sync($request->albums);

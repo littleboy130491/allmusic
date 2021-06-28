@@ -14,12 +14,11 @@
 
         toggleMenu.addEventListener('click', () => 
         {
-          if (mobileNav.style.display == "none" || mobileNav.style.display == "") {
-          mobileNav.style.display = "block";
-          } else {
-          mobileNav.style.display = "none";
-          }
+         mobileNav.classList.toggle('block');
+         mobileNav.classList.toggle('md:hidden');
+         mobileNav.classList.toggle('hidden');
         });
     </script>
   </body>
 </html>
+

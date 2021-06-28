@@ -54,6 +54,36 @@
         </div>
                         
     </div>
+
+    <div class="container py-8">
+        <h2 class="font-bold mb-2">Songwriter</h2>
+        <div class="flex space-x-2 flex-nowrap">
+            <div class="flex-50 md:flex-20">
+                    <div class="image mb-4 h-60 w-full">
+                        @if ($song->songwriter)
+                            <a href="/artist/{{ $song->songwriter->slug }}">
+                                <img 
+                                class="rounded-lg mb-4 object-cover h-full w-full" 
+                                src="/storage/{{ $song->songwriter->photo }}" 
+                                alt="{{ $song->songwriter->name }}">
+                            </a>
+                                <p>{{ $song->songwriter->name }}</p>
+                        @else
+                            <a href="/artist/{{ $song->artist->slug }}">
+                                <img 
+                                class="rounded-lg mb-4 object-cover h-full w-full" 
+                                src="/storage/{{ $song->artist->photo }}" 
+                                alt="{{ $song->artist->name }}">
+                            </a>
+                                <p>{{ $song->artist->name }}</p>
+                        @endif
+
+                    </div>
+            </div>
+        </div>
+                        
+    </div>
+
 </div>
 
 @endsection
